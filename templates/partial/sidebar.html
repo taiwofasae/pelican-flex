@@ -63,6 +63,24 @@
             <a target="{{ get_target(link) }}" href="{{ link }}" >{{ name }}</a>
           </li>
         {% endfor %}
+
+        {% if MAIN_MENU %}
+
+  {% for name, url in MENUITEMS %}
+  {% if url is iterable and url is not string %}
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ name }} <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        {% for subname, suburl in url %}
+          <li><a href="{{ suburl }}">{{ subname }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% else %}
+    <li><a href="{{ url }}">{{ name }}</a></li>
+  {% endif %}
+{% endfor %}
+ {% endif %}
       </ul>
     </nav>
     {% endif %}
